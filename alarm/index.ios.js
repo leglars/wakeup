@@ -1,51 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+const {AppRegistry} = require('react-native');
+const setup = require('./js/setup');
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  ListView
-} from 'react-native';
+AppRegistry.registerComponent('F8v2', setup);
 
-export default class alarm extends Component {
-  constructor(props) {
-    super(props);
-    
-  }
-
-  render() {
-    return (
-      <View>
-      </View>
-    );
-  }
-}
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
-
-AppRegistry.registerComponent('alarm', () => alarm);
+AppRegistry.registerComponent('alarm', () => setup);
