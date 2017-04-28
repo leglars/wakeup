@@ -3,40 +3,56 @@ import {TouchableHighlight,
         Text,
         StyleSheet,
         View,
-        Switch
-
+        Switch,
            } from 'react-native';
 
 class AlarmItem extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      isAlarmEnabled: true,
+      disabled: false,
+      time: "06:30",
       tip: "Wake up! Idiot!!!",
       repeat: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     }
   }
 
-  _onPressButton() {
-    console.log("press alarm item");
-  }
+  props: {
+    disabled: boolean,
+    time: string,
+    tip?: ?string,
+    repeat?: ?array,
+    testID?: ?string,
+  };
+
+  static propTypes = {
+
+    disabled: React.PropTypes.bool.isRequired,
+    time: React.PropTypes.string.isRequired,
+    tip: React.PropTypes.string,
+    repeat: React.PropTypes.array,
+    /**
+      * Used to locate this view in end-to-end tests.
+      */
+    testID: React.PropTypes.string,
+  };
 
   render () {
-    const { repeat } = this.state;
+    const { disabled, repeat, time, tip } = this.props;
     return (
       <TouchableHighlight
         onPress={this._onPressButton}
         style={styles.alarmItem}>
         <View style={styles.itemContainer}>
           <View style={styles.alarmLeft}>
-            <Text style={styles.alarmTime}>06:30</Text>
-            <View style={{flexDirection: "row", flexWrap: 'wrap'}}>
-              <Text style={styles.alarmContent}>{this.state.tip}</Text>
+            <Text style={styles.alarmTime}>{time}</Text>
+            <View style={{flexDirection: "row", flexWrap: 'nowrap'}}>
+              <Text style={styles.alarmContent}>{tip}</Text>
               <Text style={styles.alarmContent}>
                 {
                   repeat.length === 7
-                    ? "Daily Alarm"
-                    : repeat.map((weekday) => weekday + ' ')
+                    ? " Daily Alarm"
+                    : repeat.map((weekday) => ' ' + weekday)
                 }
               </Text>
             </View>
@@ -44,7 +60,7 @@ class AlarmItem extends React.Component{
           <View style={styles.alarmRight}>
             <Switch
               onValueChange={(value) => this.setState({isAlarmEnabled: value})}
-              value={this.state.isAlarmEnabled}
+              value={!disabled}
               tintColor="#fff" //android disable background
               style={{marginBottom: 10}}
                />
@@ -54,11 +70,15 @@ class AlarmItem extends React.Component{
       </TouchableHighlight>
     )
   }
+
+  _onPressButton() {
+    console.log("press alarm item");
+  }
 }
 
 const styles = StyleSheet.create({
   alarmItem: {
-    height: 75,
+    height: 80,
     backgroundColor: "#555555",
   },
   itemContainer: {
@@ -86,7 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   alarmContent: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#fff',
     fontWeight: '300',
   }
