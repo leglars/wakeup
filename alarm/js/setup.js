@@ -4,36 +4,37 @@
 
 import Alarm from './Alarm';
 import React from 'react';
+import { Provider } from 'react-redux';
 
-// var { Provider } = require('react-redux');
-// var configureStore = require('./store/configureStore');
+import configureStore from './redux/store';
 
 // function setup(): ReactClass<{}> {
 //   console.disableYellowBox = true;
 
   class setup extends React.Component {
 
-    // state: {
-    //   isLoading: boolean,
-    //   store: any;
-    // };
+    state: {
+      isLoading: boolean,
+      store: any;
+    };
 
     constructor() {
       super();
       // console.disableYellowBox = true;
-      // this.state = {
-      //   isLoading: true,
-      //   store: configureStore(() => this.setState({isLoading: false})),
-      // };
+      this.state = {
+          isLoading: true,
+          // store: configureStore(() => this.setState({isLoading: false})),
+          store: configureStore
+      };
     }
     render() {
       // if (this.state.isLoading) {
       //   return null;
       // }
       return (
-        // <Provider store={this.state.store}>
+        <Provider store={this.state.store}>
           <Alarm />
-        // </Provider>
+        </Provider>
       );
     }
   }

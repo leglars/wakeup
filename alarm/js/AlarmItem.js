@@ -9,12 +9,6 @@ import {TouchableHighlight,
 class AlarmItem extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {
-      disabled: false,
-      time: "06:30",
-      tip: "Wake up! Idiot!!!",
-      repeat: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    }
   }
 
   props: {
