@@ -10,6 +10,9 @@ import AlarmList from './AlarmList';
 
 
 class Alarm extends React.Component {
+    constructor(props) {
+        super(props);
+    }
   render() {
     return (
       <View style={styles.container}>
@@ -18,7 +21,7 @@ class Alarm extends React.Component {
 
          />
 
-        <ActionBar />
+        <ActionBar {...this.props}/>
 
         <View style={styles.alarmWrap}>
           <AlarmList />
@@ -29,9 +32,9 @@ class Alarm extends React.Component {
 }
 
 class ActionBar extends React.Component {
-  _onPressEdit() {
-
-  }
+    constructor(props) {
+        super(props)
+    }
 
   _onPressAdd() {
 
@@ -42,14 +45,14 @@ class ActionBar extends React.Component {
       <View style={styles.actionBar}>
         <View style={{width: 50}}>
           <Button
-            onPress={this._onPressEdit}
+            onPress={() => this.props.editAlarms()}
             title="Edit"
             color="#555"
             accessibilityLabel="Edit"
             />
 
         </View>
-        <View style={{flex: 1}}></View>
+          <View style={{flex: 1}}><Text>{this.props.alarmsEditable}</Text></View>
         <View style={{width: 50}}>
           <Button
             onPress={this._onPressAdd}

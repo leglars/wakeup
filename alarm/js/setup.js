@@ -2,50 +2,39 @@
 * @flow
 */
 
-import Alarm from './Alarm';
 import React from 'react';
+import { Provider, connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import store from './redux/store';
+import ActionCreator from './redux/actions';
 
-// var { Provider } = require('react-redux');
-// var configureStore = require('./store/configureStore');
-
-// function setup(): ReactClass<{}> {
-//   console.disableYellowBox = true;
+import Alarm from './Alarm';
 
   class setup extends React.Component {
 
-    // state: {
-    //   isLoading: boolean,
-    //   store: any;
-    // };
-
     constructor() {
       super();
-      // console.disableYellowBox = true;
-      // this.state = {
-      //   isLoading: true,
-      //   store: configureStore(() => this.setState({isLoading: false})),
-      // };
     }
     render() {
-      // if (this.state.isLoading) {
-      //   return null;
-      // }
+
       return (
-        // <Provider store={this.state.store}>
-          <Alarm />
-        // </Provider>
+          <Provider store={store}>
+            <App />
+          </Provider>
       );
     }
   }
 
-//   return Root;
-// }
+  function mapStateToProps(state) {
+    return {
+      alarms: state.alarms
+    }
+  }
 
-global.LOG = (...args) => {
-  console.log('/------------------------------\\');
-  console.log(...args);
-  console.log('\\------------------------------/');
-  return args[args.length - 1];
-};
+  function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreator, dispatch);
+  }
+
+const App = connect(mapStateToProps, mapDispatchToProps)(Alarm);
 
 module.exports = setup;
