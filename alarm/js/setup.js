@@ -4,9 +4,12 @@
 
 import Alarm from './Alarm';
 import React from 'react';
+import { Provider, connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-// var { Provider } = require('react-redux');
-// var configureStore = require('./store/configureStore');
+import {ActionCreators} from './redux/actions/index';
+
+import store from './redux/store';
 
 // function setup(): ReactClass<{}> {
 //   console.disableYellowBox = true;
@@ -22,8 +25,9 @@ import React from 'react';
       super();
       // console.disableYellowBox = true;
       // this.state = {
-      //   isLoading: true,
-      //   store: configureStore(() => this.setState({isLoading: false})),
+      //     isLoading: true,
+      //     // store: configureStore(() => this.setState({isLoading: false})),
+      //     store: configureStore
       // };
     }
     render() {
@@ -31,15 +35,23 @@ import React from 'react';
       //   return null;
       // }
       return (
-        // <Provider store={this.state.store}>
-          <Alarm />
-        // </Provider>
+        <Provider store={store} >
+          <App />
+        </Provider>
+
       );
     }
   }
 
 //   return Root;
 // }
+
+function mapDispachToProps(dispatch) {
+      return bindActionCreators(ActionCreators, dispatch);
+}
+//
+const App = connect(() => {return {}}, mapDispachToProps)(Alarm);
+
 
 global.LOG = (...args) => {
   console.log('/------------------------------\\');

@@ -10,6 +10,11 @@ import AlarmList from './AlarmList';
 
 
 class Alarm extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,12 +35,14 @@ class Alarm extends React.Component {
 
 class ActionBar extends React.Component {
   _onPressEdit() {
-
+      // this.props.enableEditAlarm();
+      console.log(this.props.ENABLE_EDIT_ALARM)
   }
 
   _onPressAdd() {
 
   }
+
 
   render() {
     return (
@@ -86,6 +93,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#dddddd",
   }
-})
+});
 
 module.exports = Alarm;
