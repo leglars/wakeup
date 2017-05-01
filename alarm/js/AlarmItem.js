@@ -12,7 +12,7 @@ class AlarmItem extends React.Component{
   }
 
   props: {
-    disabled: boolean,
+    active: boolean,
     time: string,
     tip?: ?string,
     repeat?: ?array,
@@ -21,7 +21,7 @@ class AlarmItem extends React.Component{
 
   static propTypes = {
 
-    disabled: React.PropTypes.bool.isRequired,
+    active: React.PropTypes.bool.isRequired,
     time: React.PropTypes.string.isRequired,
     tip: React.PropTypes.string,
     repeat: React.PropTypes.array,
@@ -32,7 +32,7 @@ class AlarmItem extends React.Component{
   };
 
   render () {
-    const { disabled, repeat, time, tip } = this.props;
+    const { active, repeat, time, tip } = this.props;
     return (
       <TouchableHighlight
         onPress={this._onPressButton}
@@ -54,7 +54,7 @@ class AlarmItem extends React.Component{
           <View style={styles.alarmRight}>
             <Switch
               onValueChange={(value) => this.setState({isAlarmEnabled: value})}
-              value={!disabled}
+              value={active}
               tintColor="#fff" //android disable background
               style={{marginBottom: 10}}
                />

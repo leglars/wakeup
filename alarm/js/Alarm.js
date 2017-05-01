@@ -11,8 +11,10 @@ import AlarmList from './AlarmList';
 
 class Alarm extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+        console.log(props)
     }
+
   render() {
     return (
       <View style={styles.container}>
@@ -21,10 +23,12 @@ class Alarm extends React.Component {
 
          />
 
-        <ActionBar {...this.props}/>
+          <ActionBar alarmsEditable={this.props.alarmsEditable}
+                     toggleEditAlarms={this.props.toggleEditAlarms}
+                     addAlarm={this.props.addAlarm}/>
 
         <View style={styles.alarmWrap}>
-          <AlarmList />
+          <AlarmList alarms={this.props.alarms.alarms}/>
         </View>
       </View>
     )
@@ -32,27 +36,44 @@ class Alarm extends React.Component {
 }
 
 class ActionBar extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props)
+        this._onPressAdd= this._onPressAdd.bind(this);
     }
 
-  _onPressAdd() {
-
+  _onPressAdd(){
+      const newAlarm = {
+          time: "08:30",
+          tip: "haha",
+          repeat: ["Mon", "Wed"]
+      };
+      this.props.addAlarm(
+          newAlarm.time, newAlarm.tip, newAlarm.repeat
+      )
   }
 
   render() {
+    const { alarmsEditable, toggleEditAlarms } = this.props;
     return (
       <View style={styles.actionBar}>
-        <View style={{width: 50}}>
-          <Button
-            onPress={() => this.props.editAlarms()}
-            title="Edit"
-            color="#555"
-            accessibilityLabel="Edit"
-            />
+        <View style={{width: 72}}>
+            {!alarmsEditable
+                ? <Button
+                    onPress={() => toggleEditAlarms()}
+                    title="Edit"
+                    color="#555"
+                    accessibilityLabel="Edit"
+                />
+                : <Button
+                    onPress={() => toggleEditAlarms()}
+                    title="Cancel"
+                    color="#555"
+                    accessibilityLabel="Cancel"
+                />
+            }
 
         </View>
-          <View style={{flex: 1}}><Text>{this.props.alarmsEditable}</Text></View>
+          <View style={{flex: 1}}></View>
         <View style={{width: 50}}>
           <Button
             onPress={this._onPressAdd}

@@ -3,39 +3,31 @@
  */
 import * as types from '../actions/types';
 
+function addAlarm (state, action){
+    return [
+        ...state,
+        {
+            time: action.time,
+            tip: action.tip,
+            repeat: action.repeat,
+            active: true
+        }
+    ]
+}
+
 export function alarms (state=[], action) {
     switch (action.type) {
-        case types.EDIT_ALARMS:
+        case types.TOGGLE_EDIT_ALARMS:
             return{
-                    alarmsEditable: true
-                }
-            ;
+                    alarmsEditable: !state.alarmsEditable
+                };
+        case types.ADD_ALARM:
+            return {
+                ...state,
+                alarms: addAlarm(state.alarms, action)
+            };
         default:
             return state
     }
 }
-
-// function todos(state = [], action) {
-//     switch (action.type) {
-//         case ADD_TODO:
-//             return [
-//                 ...state,
-//                 {
-//                     text: action.text,
-//                     completed: false
-//                 }
-//             ]
-//         case TOGGLE_TODO:
-//             return state.map((todo, index) => {
-//                 if (index === action.index) {
-//                     return Object.assign({}, todo, {
-//                         completed: !todo.completed
-//                     })
-//                 }
-//                 return todo
-//             })
-//         default:
-//             return state
-//     }
-// }
 

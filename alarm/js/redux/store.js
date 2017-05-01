@@ -8,6 +8,14 @@ import logger from 'redux-logger';
 const initialState = {
     alarms: {
         alarmsEditable: false,
+        alarms: [
+            {
+                time: "06:30",
+                tip: "Wake up! Idiot!!!",
+                repeat: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                active: true,
+            }
+        ]
     }
 };
 
