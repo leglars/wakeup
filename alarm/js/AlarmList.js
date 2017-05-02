@@ -15,7 +15,7 @@ class AlarmList extends React.Component{
       //initial data, bad practice
       // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       // this.state = {
-      //     dataSource: ds.cloneWithRows(this.props.alarms);
+      //     dataSource: ds.cloneWithRows(this.props.alarms),
       // }
   }
     // when props updates, bad practice

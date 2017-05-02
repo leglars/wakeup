@@ -19,12 +19,13 @@ export function alarms (state=[], action) {
     switch (action.type) {
         case types.TOGGLE_EDIT_ALARMS:
             return{
-                    alarmsEditable: !state.alarmsEditable
+                ...state,
+                alarmsEditable: !state.alarmsEditable
                 };
         case types.ADD_ALARM:
             return {
                 ...state,
-                alarms: addAlarm(state.alarms, action)
+                alarmConfigs: addAlarm(state.alarmConfigs, action)
             };
         default:
             return state

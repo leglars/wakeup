@@ -4,11 +4,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import logger from 'redux-logger';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
+import createFilter from 'redux-persist-transform-filter';
 
 const initialState = {
     alarms: {
         alarmsEditable: false,
-        alarms: [
+        alarmConfigs: [
             {
                 time: "06:30",
                 tip: "Wake up! Idiot!!!",
@@ -19,8 +22,22 @@ const initialState = {
     }
 };
 
-const enhancer = compose(applyMiddleware(logger),);
+const enhancer = compose(applyMiddleware(logger),autoRehydrate());
+// const enhancer = compose(applyMiddleware(logger),);
 
 const store = createStore(reducers, initialState, enhancer);
+
+// https://github.com/rt2zz/redux-persist/issues/318
+const saveAlarmConfigs = createFilter(
+    'alarms',
+    ['alarmConfigs']
+);
+
+persistStore(store, {
+    storage: AsyncStorage,
+    transforms: [
+        saveAlarmConfigs
+    ]
+});
 
 export default store;

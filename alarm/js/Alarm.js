@@ -23,12 +23,12 @@ class Alarm extends React.Component {
 
          />
 
-          <ActionBar alarmsEditable={this.props.alarmsEditable}
+          <ActionBar alarmsEditable={this.props.alarms.alarmsEditable}
                      toggleEditAlarms={this.props.toggleEditAlarms}
                      addAlarm={this.props.addAlarm}/>
 
         <View style={styles.alarmWrap}>
-          <AlarmList alarms={this.props.alarms.alarms}/>
+          <AlarmList alarms={this.props.alarms.alarmConfigs}/>
         </View>
       </View>
     )
@@ -37,7 +37,7 @@ class Alarm extends React.Component {
 
 class ActionBar extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this._onPressAdd= this._onPressAdd.bind(this);
     }
 
@@ -54,23 +54,16 @@ class ActionBar extends React.Component {
 
   render() {
     const { alarmsEditable, toggleEditAlarms } = this.props;
+    console.log(alarmsEditable);
     return (
       <View style={styles.actionBar}>
         <View style={{width: 72}}>
-            {!alarmsEditable
-                ? <Button
+             <Button
                     onPress={() => toggleEditAlarms()}
-                    title="Edit"
+                    title={!alarmsEditable ? "Edit" : "Cancel"}
                     color="#555"
-                    accessibilityLabel="Edit"
+                    accessibilityLabel={!alarmsEditable? "Edit" : "Cancel"}
                 />
-                : <Button
-                    onPress={() => toggleEditAlarms()}
-                    title="Cancel"
-                    color="#555"
-                    accessibilityLabel="Cancel"
-                />
-            }
 
         </View>
           <View style={{flex: 1}}></View>
