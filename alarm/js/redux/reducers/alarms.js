@@ -2,11 +2,13 @@
  * Created by leglars on 2017/5/1.
  */
 import * as types from '../actions/types';
+import uuid from 'uuid';
 
 function addAlarm (state, action){
     return [
         ...state,
         {
+            id: uuid(),
             time: action.time,
             tip: action.tip,
             repeat: action.repeat,

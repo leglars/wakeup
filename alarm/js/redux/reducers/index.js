@@ -4,9 +4,11 @@
 
 import { combineReducers } from 'redux';
 import * as alarms from './alarms';
+import * as alarmConfig from './alarmConfig';
 
 const reducers = combineReducers(Object.assign(
     alarms,
+    alarmConfig,
 ));
 
 export default reducers;

@@ -19,6 +19,39 @@ const initialState = {
                 active: true,
             }
         ]
+    },
+    alarmConfig:{
+        repeat: [
+            {
+                name: "M",
+                id:1,
+                toggle:false
+            },{
+                name: "T",
+                id:2,
+                toggle:false
+            },{
+                name: "W",
+                id:3,
+                toggle:false
+            },{
+                name: "T",
+                id:4,
+                toggle:false
+            },{
+                name: "F",
+                id:5,
+                toggle:false
+            },{
+                name: "S",
+                id:6,
+                toggle:false
+            },{
+                name: "S",
+                id:7,
+                toggle:false
+            }
+        ],
     }
 };
 
@@ -35,6 +68,7 @@ const saveAlarmConfigs = createFilter(
 
 persistStore(store, {
     storage: AsyncStorage,
+    blacklist: ["alarmConfig"],
     transforms: [
         saveAlarmConfigs
     ]
