@@ -131,20 +131,27 @@ class AddAlarm extends React.Component{
         return toggledList.reduce((repeatList, i)=>{
             console.log(i);
             switch (i) {
-                case i === 1:
+                case 1:
                     repeatList.push('Mon');
-                case i === 2:
+                    break;
+                case 2:
                     repeatList.push('Tus');
+                    break;
                 case 3:
                     repeatList.push('Wed');
+                    break;
                 case 4:
                     repeatList.push('Thu');
+                    break;
                 case 5:
                     repeatList.push('Fri');
+                    break;
                 case 6:
                     repeatList.push('Sat');
+                    break;
                 case 7:
                     repeatList.push('Sun');
+                    break;
             }
             return repeatList
         }, []);
@@ -159,9 +166,7 @@ class AddAlarm extends React.Component{
         const timePackage = this._24to12(hour, min);
         const tip = this.state.tip;
         const repeat = this._transformRepeat(this.props.alarmConfig.repeat);
-        console.log(repeat);
-
-
+        this.props.saveAlarm(date, timePackage, tip, repeat);
     };
 
 

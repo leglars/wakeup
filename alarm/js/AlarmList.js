@@ -44,7 +44,7 @@ class AlarmList extends React.Component{
 
 AlarmList.propTypes = {
   alarms: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.number || PropTypes.string,
       time: PropTypes.string.isRequired,
       tip: PropTypes.string,
       repeat: PropTypes.arrayOf(PropTypes.string).isRequired,

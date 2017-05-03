@@ -4,12 +4,14 @@
 import * as types from '../actions/types';
 import uuid from 'uuid';
 
-function addAlarm (state, action){
+function saveAlarm (state, action){
     return [
         ...state,
         {
             id: uuid(),
+            date: action.date,
             time: action.time,
+            extension: action.extension,
             tip: action.tip,
             repeat: action.repeat,
             active: true
@@ -24,10 +26,10 @@ export function alarms (state=[], action) {
                 ...state,
                 alarmsEditable: !state.alarmsEditable
                 };
-        case types.ADD_ALARM:
+        case types.SAVE_ALARM:
             return {
                 ...state,
-                alarmConfigs: addAlarm(state.alarmConfigs, action)
+                alarmConfigs: saveAlarm(state.alarmConfigs, action)
             };
         default:
             return state

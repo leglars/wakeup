@@ -3,7 +3,7 @@
  */
 
 export const TOGGLE_EDIT_ALARMS = "TOGGLE_EDIT_ALARMS";
-export const ADD_ALARM = "ADD_ALARM";
+export const SAVE_ALARM = "SAVE_ALARM";
 export const DELETE_ALARM = "DELETE_ALARM";
 
 export const UPDATE_DATE = "UPDATE_DATE";

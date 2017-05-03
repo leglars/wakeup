@@ -3,7 +3,7 @@
  */
 
 // export const TOGGLE_EDIT_ALARMS = "TOGGLE_EDIT_ALARMS";
-// export const ADD_ALARM = "ADD_ALARM";
+// export const SAVE_ALARM = "SAVE_ALARM";
 // export const DELETE_ALARM = "DELETE_ALARM";
 
 export function toggleEditAlarms() {
@@ -12,12 +12,14 @@ export function toggleEditAlarms() {
     }
 }
 
-export function addAlarm(time, tip, repeat) {
+export function saveAlarm(date, time, tip, repeat) {
     return {
-        type: "ADD_ALARM",
-        time: time,
+        type: "SAVE_ALARM",
+        date: date,
+        time: time.time,
+        extension: time.extension,
         tip: tip,
-        repeat: repeat
+        repeat: repeat,
     }
 }
 
