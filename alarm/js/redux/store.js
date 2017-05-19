@@ -7,49 +7,52 @@ import logger from 'redux-logger';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import createFilter from 'redux-persist-transform-filter';
+import uuid from 'uuid';
+
+console.log(uuid())
 
 const initialState = {
     alarms: {
         alarmsEditable: false,
-        alarmConfigs: [
-            {
-                time: "06:30",
-                tip: "Wake up! Idiot!!!",
-                repeat: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                active: true,
-            }
-        ]
+        alarmConfigs: [{
+            id: "4ab3e993-a00a-4964-924a-6da7c2b4d8e9",
+            time: "07:00",
+            extension: "AM",
+            tip: "DefaultAlarm",
+            repeat: [],
+            active: true,
+        }]
     },
-    alarmConfig:{
+    alarmConfig: {
         repeat: [
             {
                 name: "M",
-                id:1,
-                toggle:false
-            },{
+                id: 1,
+                toggle: false
+            }, {
                 name: "T",
-                id:2,
-                toggle:false
-            },{
+                id: 2,
+                toggle: false
+            }, {
                 name: "W",
-                id:3,
-                toggle:false
-            },{
+                id: 3,
+                toggle: false
+            }, {
                 name: "T",
-                id:4,
-                toggle:false
-            },{
+                id: 4,
+                toggle: false
+            }, {
                 name: "F",
-                id:5,
-                toggle:false
-            },{
+                id: 5,
+                toggle: false
+            }, {
                 name: "S",
-                id:6,
-                toggle:false
-            },{
+                id: 6,
+                toggle: false
+            }, {
                 name: "S",
-                id:7,
-                toggle:false
+                id: 7,
+                toggle: false
             }
         ],
     }

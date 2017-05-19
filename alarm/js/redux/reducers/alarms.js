@@ -19,7 +19,15 @@ function saveAlarm (state, action){
     ]
 }
 
-export function alarms (state=[], action) {
+function deleteAlarm(state, action) {
+    const index = state.findIndex((alarm) => alarm.id === action.id);
+    return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+    ]
+}
+
+export function alarms (state={}, action) {
     switch (action.type) {
         case types.TOGGLE_EDIT_ALARMS:
             return{
@@ -30,6 +38,11 @@ export function alarms (state=[], action) {
             return {
                 ...state,
                 alarmConfigs: saveAlarm(state.alarmConfigs, action)
+            };
+        case types.DELETE_ALARM:
+            return {
+                ...state,
+                alarmConfigs: deleteAlarm(state.alarmConfigs, action)
             };
         default:
             return state

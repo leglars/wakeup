@@ -29,7 +29,10 @@ class Alarm extends React.Component {
                      addAlarm={this.props.addAlarm}/>
 
         <View style={styles.alarmWrap}>
-          <AlarmList alarms={this.props.alarms.alarmConfigs}/>
+          <AlarmList alarms={this.props.alarms.alarmConfigs}
+                     alarmsEditable={this.props.alarms.alarmsEditable}
+                     deleteAlarm={this.props.deleteAlarm}
+                     />
         </View>
       </View>
     )

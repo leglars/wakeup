@@ -4,6 +4,8 @@ import {TouchableHighlight,
         StyleSheet,
         View,
         Switch,
+    Button,
+    Image
            } from 'react-native';
 
 class AlarmItem extends React.Component{
@@ -32,7 +34,7 @@ class AlarmItem extends React.Component{
   };
 
   render () {
-    const { active, repeat, time, tip } = this.props;
+    const { active, repeat, time, tip, id, deleteAlarm, alarmsEditable } = this.props;
     return (
       <TouchableHighlight
         onPress={this._onPressButton}
@@ -52,12 +54,23 @@ class AlarmItem extends React.Component{
             </View>
           </View>
           <View style={styles.alarmRight}>
-            <Switch
-              onValueChange={(value) => this.setState({isAlarmEnabled: value})}
-              value={active}
-              tintColor="#fff" //android disable background
-              style={{marginBottom: 10}}
-               />
+              {
+                ! alarmsEditable
+                    ? <Switch
+                          onValueChange={(value) => this.setState({isAlarmEnabled: value})}
+                          color= "#fff"
+                          value={active}
+                          tintColor="#fff" //android disable background
+                          style={{marginBottom: 10}}
+                      />
+                    : <TouchableHighlight onPress={() => deleteAlarm(id)}>
+                        <Image
+                            style={{width: 32, height: 32}}
+                            source={require('./img/delete.png')}
+                        />
+                    </TouchableHighlight>
+              }
+
           </View>
 
         </View>

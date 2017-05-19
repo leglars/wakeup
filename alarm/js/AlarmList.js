@@ -37,19 +37,25 @@ class AlarmList extends React.Component{
         <ListView
           // style={styles.alarmList}
           dataSource={dataSource}
-          renderRow={(alarm) => <AlarmItem {...alarm} />}
+          renderRow={(alarm) =>
+                <AlarmItem {...alarm}
+                           alarmsEditable={this.props.alarmsEditable}
+                           deleteAlarm={this.props.deleteAlarm}/>}
           />
     )}
 }
 
 AlarmList.propTypes = {
-  alarms: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number || PropTypes.string,
-      time: PropTypes.string.isRequired,
-      tip: PropTypes.string,
-      repeat: PropTypes.arrayOf(PropTypes.string).isRequired,
-      active: PropTypes.bool
-  }))
+    alarms: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        time: PropTypes.string.isRequired,
+        extension: PropTypes.string.isRequired,
+        tip: PropTypes.string,
+        repeat: PropTypes.arrayOf(PropTypes.string).isRequired,
+        active: PropTypes.bool
+    })),
+    alarmsEditable: PropTypes.bool.isRequired,
+    deleteAlarm: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

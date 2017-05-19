@@ -3,9 +3,6 @@
  */
 import * as types from '../actions/types';
 
-const initialState = {
-    tip: "Alarm haha"
-};
 
 function toggleRepeatItem(state, id){
     return state.map((item, index) => {
@@ -17,7 +14,7 @@ function toggleRepeatItem(state, id){
         })
 }
 
-export function alarmConfig(state=initialState, action){
+export function alarmConfig(state={}, action){
     switch(action.type) {
         case types.UPDATE_DATE:
             return {

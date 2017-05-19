@@ -1,0 +1,23 @@
+{
+  "name": "wakeup-alarm-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "firebase": "^3.9.0",
+    "lodash": "^4.17.4",
+    "lodash.debounce": "^4.0.8",
+    "particle-api-js": "^6.5.0",
+    "request": "^2.81.0",
+    "rxjs": "^5.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
