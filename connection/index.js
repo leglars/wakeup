@@ -41,20 +41,25 @@ particle.login({username:'leglars@gmail.com', password:'1936887IWMzy'}).then(
 var database = firebase.database();
 var app = express();
 
-app.get("/", function(req, res) {
+app.post("/", function(req, res) {
     res.send("Hello World");
     // database.ref("test/from/backend").set({
     //     "hello": "world"
     // })
+    console.log("you reach a new place")
+    
+    console.log(req)
+    console.log(req.query)
 });
 
-app.get("/devicedata", function(req, res){
+app.post("/devicedata", function(req, res){
     
     var userInfo = {
-        userId: req.query.userId,
-        userSteps: Number(req.query.userSteps) || 30,
-        userWeight: Number(req.query.userWeight) || 1500,
-        date: getDate(),
+        userId: req.query.userId || "chenx",
+        userSteps: Number(req.query.userSteps) || 3,
+        userWeight: Number(req.query.userWeight) || 150,
+        date: req.query.date || getDate(),
+        uuid: req.query.uuid
     }
 
     function getDate() {
@@ -83,10 +88,11 @@ app.get("/devicedata", function(req, res){
      *  firebase structure
      *  userID
      *     # [Date]
-     *        ## stepRecord - update from backend
-     *           ### record
-     *        ## steps - update from backend
-     *        ## isWakeup - update from ios
+     *        ##uuid
+        *        ### stepRecord - update from backend
+        *           #### record
+        *        ### steps - update from backend
+        *        ### isWakeup - update from ios
      *     # userInfo
      *        ## ...
      */
@@ -154,13 +160,13 @@ app.get("/devicedata", function(req, res){
 
     function setStepRecord(d) {
         database.ref(userInfo.userId + "/"
-                     + userInfo.date + "/stepRecord")
+                     + userInfo.date + "/" + userInfo.uuid + "/stepRecord")
                      .push(d)
     }
 
     function updateFBStep(step) {
         var updateStep = {}
-        updateStep[userInfo.userId + "/" + userInfo.date + "/steps"] = step
+        updateStep[userInfo.userId + "/" + userInfo.date+ "/" + userInfo.uuid + "/steps"] = step
         database.ref().update(updateStep)
     }
 });
