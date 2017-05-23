@@ -97,7 +97,8 @@ app.post("/devicedata", function(req, res){
      *        ## ...
      */
     var steps = 0;
-    var _data = []
+    var _data = [];
+    var error = 0;
     console.log("go into data")
     var getPressureValueFromSensor = setInterval(function(){
         Rx.Observable.fromPromise(
@@ -113,14 +114,15 @@ app.post("/devicedata", function(req, res){
                 pushDataAndCheckStep(d);
             },
             error: function(err) {
-                console.log("error happened: " + err)
+                console.log("error happened: " + err);
+                errorIncrement();
             },
             complete: function() {
                 console.log("complete")
             }
         })
 
-    if(steps === userInfo.userSteps) {
+    if(steps === userInfo.userSteps || error > 100) {
             clearInterval(getPressureValueFromSensor);
             console.log("stop the loop");
         }
@@ -136,6 +138,11 @@ app.post("/devicedata", function(req, res){
 
     function cleanData() {
         _data = [];
+    }
+
+    function errorIncrement(){
+        error ++;
+        console.log(error)
     }
 
     function updateSteps() {
