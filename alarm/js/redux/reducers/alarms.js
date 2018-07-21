@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by leglars on 2017/5/1.
  */
 import * as types from '../actions/types';
